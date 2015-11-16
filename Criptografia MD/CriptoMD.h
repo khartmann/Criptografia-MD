@@ -16,31 +16,38 @@
 
 #endif /* CriptoMD_h */
 
-typedef struct invM
+typedef struct num{
+    int x;
+    struct num *prox;
+}dVector;
+
+//Vetor Dinamico
+
+typedef struct ord
 {
     int x;
     int y;
     int n;
-    struct invM *prox;
-}listaInvM;
+    struct ord *prox;
+}dTrioVet;
 
 int menu();
 //MENU
 //Apresenta opçoes do programa
 
 
-int imprChar(int *vet);
+int imprChar(dVector *vet);
 //Entrada de ASCII NO MAXIMO 10000
 //Imprime a frase equivalente aos numeros recebidos pela funçao.
 
 int imprInt(char *cripto);
 //Imprime o codigo ASC II
 
-int imprInvM(listaInvM *vector);
+int imprInvM(dTrioVet *vector);
 //Entrada: Lista com dois valores e interio n do tamanho do conjunto
 //Impprime dois pontos salvos no struct tipo listaInvM
 
-int *entradaASCII(char *titulo);
+dVector *entradaASCII(char *titulo);
 // Entrada de Ints
 //Recebe os nuemros digitados pelo usuario, parada com 0
 
@@ -55,8 +62,11 @@ char pausa(char *titulo);
 //recebe titulo para sem impresso na tela
 //Pausa o programa esperando pelo usuario
 
-listaInvM *invMod(int n);
+dTrioVet *invMod(int n);
 //Imprime os inversos Modulares
 
-listaInvM *novoStruct(listaInvM *vector ,int x, int y, int n);
-//salva os valores que formam um inverso modular
+dTrioVet *novoTrio(dTrioVet *vector ,int x, int y, int n);
+//salva 3 valores em uma lista Struct
+
+dVector *novoInt(dVector *vector, int x);
+//Salva um int em um Vetor Dinamico

@@ -16,7 +16,7 @@
 int menu(){
     int op;
     fflush(stdin);
-    printf("\n-----------MENU-----------\n1-Frase para ASCII\n2-ASCII para Frase\n3-Verificaçao de Inversos Modulares\n0-Sair do programa\n--------------------------\n\n\nDigite sua opçao: ");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-----------MENU-----------\n1-Frase para ASCII\n2-ASCII para Frase\n3-Verificaçao de Inversos Modulares\n0-Sair do programa\n--------------------------\n\n\nDigite sua opçao: ");
     scanf(" %d", &op);
     switch (op){
         case 1:
@@ -51,14 +51,15 @@ char *entradaString(char *titulo){
     return frase;
 }
 
-int *entradaASCII(char *titulo){
+dVector *entradaASCII(char *titulo){
     fflush(stdin);
-    int *vector= (int*) malloc (10000*(sizeof(int))), x=0;
+    dVector *vector= NULL;
+    int tmp=0;
     printf("%s",titulo);
     do{
-        scanf(" %d", (vector+x));
-        x++;
-    }while ( *(vector+x-1)!=0);
+        tmp=entradaInt("");
+        vector=novoInt(vector, tmp);
+    }while ( tmp!=0);
     
     fflush(stdin);
     return vector;
@@ -72,13 +73,13 @@ int entradaInt(char titulo[]){
     return valor;
 }
 
-int imprChar(int *vet){
-    int x=-1;
+int imprChar(dVector *vet){
     printf("\n\n\nConversao do codigo ASCII: ");
-    do{
-        x++;
-        printf("%c", *(vet+x));
-    }while(*(vet+x)!=0);
+    dVector *teste = (dVector*) malloc(sizeof(dVector));
+    for (teste = vet; teste!=NULL ; teste=teste->prox){
+        printf("%c", teste->x);
+    }
+    free(vet);
     pausa("\n\nDigite qualquer tecla pra continuar: ");
     return 0;
 }
@@ -88,13 +89,14 @@ int imprInt(char *cripto){
     for(int x=0; x<(strlen(cripto)*sizeof(char)); x++){
         printf(" %d", *(cripto+x));
     }
+    free(cripto);
     pausa("\n\nDigite qualquer tecla pra continuar: ");
     return 0;
 }
 
-int imprInvM(listaInvM *vector){
+int imprInvM(dTrioVet *vector){
     int x=0;
-    listaInvM *teste= (listaInvM*) malloc(sizeof(listaInvM));
+    dTrioVet *teste= (dTrioVet*) malloc(sizeof(dTrioVet));
     printf("\n\n\n\n\n\n\n\n\n\n\nInversos Modulares em Z%d:\n--\n|----------------------------------------------------------------------|", vector->n);
     for (teste = vector; teste!=NULL ; teste=teste->prox , x++){
         if((x%2)==0){
@@ -122,8 +124,8 @@ char pausa(char *titulo){
     return letra;
 }
 
-listaInvM *novoStruct(listaInvM *vector ,int x, int y, int n){
-    listaInvM *novoElemento = (listaInvM*) malloc(sizeof(listaInvM));
+dTrioVet *novoTrio(dTrioVet *vector ,int x, int y, int n){
+    dTrioVet *novoElemento = (dTrioVet*) malloc(sizeof(dTrioVet));
     if (vector==NULL){
         novoElemento->x=x;
         novoElemento->y=y;
@@ -135,22 +137,36 @@ listaInvM *novoStruct(listaInvM *vector ,int x, int y, int n){
         novoElemento->y=y;
         novoElemento->prox=NULL;
         
-        listaInvM *teste;
+        dTrioVet *teste;
         for(teste=vector; teste->prox!=NULL;teste=teste->prox);
         teste->prox= novoElemento;
     }
     return vector;
 }
 
+dVector *novoInt(dVector *vector, int x){
+    dVector *novoElemento = (dVector*) malloc(sizeof(dVector));
+    if (vector==NULL){
+        novoElemento->x= x;
+        novoElemento->prox= NULL;
+        vector= novoElemento;
+    }else{
+        novoElemento->x= x;
+        novoElemento->prox= NULL;
+        
+        dVector *teste;
+        for(teste=vector; teste->prox != NULL; teste=teste->prox);
+        teste->prox= novoElemento;
+    }
+    return vector;
+}
 
-
-listaInvM *invMod(int n){
-    listaInvM *vector = (listaInvM*) malloc(sizeof(listaInvM));
-    vector=NULL;
+dTrioVet *invMod(int n){
+    dTrioVet *vector=NULL;
     for(int x=1; x<n;x++){
         for(int y=1; y<n; y++){
             if(((x*y)%n)==1){
-                vector= novoStruct(vector, x, y, n);
+                vector= novoTrio(vector, x, y, n);
             }
             
         }
