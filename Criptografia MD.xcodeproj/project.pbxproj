@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F160A70F1BF4F04200F2A13C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F160A70E1BF4F04200F2A13C /* main.c */; };
+		F1B151B01BFA0658004B335C /* CriptoMD.c in Sources */ = {isa = PBXBuildFile; fileRef = F1B151AE1BFA0658004B335C /* CriptoMD.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		F160A70B1BF4F04200F2A13C /* Criptografia MD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Criptografia MD"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F160A70E1BF4F04200F2A13C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		F1B151AE1BFA0658004B335C /* CriptoMD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CriptoMD.c; sourceTree = "<group>"; };
+		F1B151AF1BFA0658004B335C /* CriptoMD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CriptoMD.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				F160A70E1BF4F04200F2A13C /* main.c */,
+				F1B151AE1BFA0658004B335C /* CriptoMD.c */,
+				F1B151AF1BFA0658004B335C /* CriptoMD.h */,
 			);
 			path = "Criptografia MD";
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F160A70F1BF4F04200F2A13C /* main.c in Sources */,
+				F1B151B01BFA0658004B335C /* CriptoMD.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +243,7 @@
 				F160A7141BF4F04200F2A13C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
