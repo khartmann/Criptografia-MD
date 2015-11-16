@@ -75,7 +75,7 @@ int entradaInt(char titulo[]){
 
 int imprChar(dVector *vet){
     printf("\n\n\nConversao do codigo ASCII: ");
-    dVector *teste = (dVector*) malloc(sizeof(dVector));
+    dVector *teste;
     for (teste = vet; teste!=NULL ; teste=teste->prox){
         printf("%c", teste->x);
     }
@@ -96,7 +96,7 @@ int imprInt(char *cripto){
 
 int imprInvM(dTrioVet *vector){
     int x=0;
-    dTrioVet *teste= (dTrioVet*) malloc(sizeof(dTrioVet));
+    dTrioVet *teste;
     printf("\n\n\n\n\n\n\n\n\n\n\nInversos Modulares em Z%d:\n--\n|----------------------------------------------------------------------|", vector->n);
     for (teste = vector; teste!=NULL ; teste=teste->prox , x++){
         if((x%2)==0){
@@ -163,8 +163,8 @@ dVector *novoInt(dVector *vector, int x){
 
 dTrioVet *invMod(int n){
     dTrioVet *vector=NULL;
-    for(int x=1; x<n;x++){
-        for(int y=1; y<n; y++){
+    for(int x=0; x<n;x++){
+        for(int y=0; y<n; y++){
             if(((x*y)%n)==1){
                 vector= novoTrio(vector, x, y, n);
             }
