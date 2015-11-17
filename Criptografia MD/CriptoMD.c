@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "CriptoMD.h"
 
 
@@ -163,13 +164,25 @@ dVector *novoInt(dVector *vector, int x){
 
 dTrioVet *invMod(int n){
     dTrioVet *vector=NULL;
-    for(int x=0; x<n;x++){
-        for(int y=0; y<n; y++){
-            if(((x*y)%n)==1){
-                vector= novoTrio(vector, x, y, n);
+    if((n%2)==0){
+        for(int x=1; x<n;x+=2){
+            for(int y=1; y<n; y+=2){
+                if(((x*y)%n)==1){
+                    vector= novoTrio(vector, x, y, n);
+                }
+                
             }
-            
+        }
+    }else{
+        for(int x=1; x<n;x++){
+            for(int y=1; y<n; y++){
+                if(((x*y)%n)==1){
+                    vector= novoTrio(vector, x, y, n);
+                }
+                
+            }
         }
     }
     return vector;
 }
+
