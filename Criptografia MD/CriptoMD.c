@@ -22,11 +22,11 @@ int menu(){
     switch (op){
         case 1:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            return imprInt(entradaString("\n--------Frase para ASCII------\n\nDigite a String: "));
+            return imprInt(entradaString("\n--------ASCII para Decimal------\n\nDigite a String: "));
             break;
         case 2:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            return imprChar(entradaASCII("\n--------ASCII para Frase------\n\nDigite a String ASCII separando por Espaços e digitando 0 no fim: "));
+            return imprChar(entradaASCII("\n--------Decimal para ASCII------\n\nDigite a String ASCII separando por Espaços e digitando 0 no fim: "));
             break;
         case 3:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
