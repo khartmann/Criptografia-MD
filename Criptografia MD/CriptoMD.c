@@ -17,20 +17,24 @@
 int menu(){
     int op;
     fflush(stdin);
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-----------MENU-----------\n1-Frase para ASCII\n2-ASCII para Frase\n3-Verificaçao de Inversos Modulares\n0-Sair do programa\n--------------------------\n\n\nDigite sua opçao: ");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-----------MENU-----------\n1-Frase para ASCII\n2-ASCII para Frase\n3-Verificaçao de Inversos Modulares\n4-Raizes Modulares\n0-Sair do programa\n--------------------------\n\n\nDigite sua opçao: ");
     scanf(" %d", &op);
     switch (op){
         case 1:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            return imprInt(entradaString("\n--------ASCII para Decimal------\n\nDigite a String: "));
+            return imprInt(entradaString("\n--------ASCII para Decimal------\n\nDigite a String: "), "\n\n\nASC II: ");
             break;
         case 2:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            return imprChar(entradaASCII("\n--------Decimal para ASCII------\n\nDigite a String ASCII separando por Espaços e digitando 0 no fim: "));
+            return imprChar(entradaASCII("\n--------Decimal para ASCII------\n\nDigite a String ASCII separando por Espaços e digitando 0 no fim: "),"\n\n\nConversao do codigo ASCII: ", "\n\nErro: string nao recebida\nDigite qualquer tecla para continuar: ");
             break;
         case 3:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            return imprInvM( invMod(entradaInt("\n\n\n\nDigite o tamanho do conjunto ( Zn ) a ser analizado:")));
+            return imprInvM( invMod(entradaInt("\n\n\n\nDigite o tamanho do conjunto ( Zn ) a ser analizado: ")), "\n\nNao ha inversos modulares neste conjunto Zn\nDigite qualquer tecla para continuar: ");
+            break;
+        case 4:
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            return imprVet(raizMod(entradaInt("\n\n\n\nDigite o tamanho do conjunto ( Zn ) a ser analizado: "), entradaInt("\n\n\n\nDigite o Radicando n da raiz √n: ")), "\n\n\n Raizes Modulares: ", "\n\nNao ha raizes deste numero nesse conjunto Zn\nDigite qualquer tecla para continuar: ") ;
             break;
         case 0:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObrigado por usar o programa.\n\n ");
@@ -66,7 +70,7 @@ dVector *entradaASCII(char *titulo){
     return vector;
 }
 
-int entradaInt(char titulo[]){
+int entradaInt(char *titulo){
     int valor;
     fflush(stdin);
     printf(" %s",  titulo);
@@ -74,19 +78,25 @@ int entradaInt(char titulo[]){
     return valor;
 }
 
-int imprChar(dVector *vet){
-    printf("\n\n\nConversao do codigo ASCII: ");
+int imprChar(dVector *vet, char *titulo, char *erro){
+    printf("%s", titulo);
     dVector *teste;
-    for (teste = vet; teste!=NULL ; teste=teste->prox){
-        printf("%c", teste->x);
+    if(vet != NULL){
+        
+        for (teste = vet; teste!=NULL ; teste=teste->prox){
+            printf("%c", teste->x);
+        }
+        free(vet);
+        pausa("\n\nDigite qualquer tecla pra continuar: ");
+        return 0;
+    }else{
+        pausa(erro);
+        return 0;
     }
-    free(vet);
-    pausa("\n\nDigite qualquer tecla pra continuar: ");
-    return 0;
 }
 
-int imprInt(char *cripto){
-    printf("\n\n\nASC II: ");
+int imprInt(char *cripto, char *titulo){
+    printf("%s", titulo);
     for(int x=0; x<(strlen(cripto)*sizeof(char)); x++){
         printf(" %d", *(cripto+x));
     }
@@ -95,9 +105,26 @@ int imprInt(char *cripto){
     return 0;
 }
 
-int imprInvM(dTrioVet *vector){
+int imprVet(dVector *vet, char *titulo, char *erro){
+    dVector *teste;
+    if (vet !=NULL){
+        printf("%s", titulo);
+    for (teste = vet; teste!=NULL ; teste=teste->prox){
+        printf("\n|  %5.d |", teste->x);
+    }
+    free(vet);
+    pausa("\n\n\n\nDigite qualquer tecla pra continuar: ");
+    return 0;
+    }else{
+        pausa(erro);
+        return 0;
+    }
+}
+
+int imprInvM(dTrioVet *vector, char *erro){
     int x=0;
     dTrioVet *teste;
+    if(vector != NULL){
     printf("\n\n\n\n\n\n\n\n\n\n\nInversos Modulares em Z%d:\n--\n|----------------------------------------------------------------------|", vector->n);
     for (teste = vector; teste!=NULL ; teste=teste->prox , x++){
         if((x%2)==0){
@@ -114,6 +141,10 @@ int imprInvM(dTrioVet *vector){
     free(vector);
     pausa("\n\n Digire qualquer tecla para continuar: ");
     return 0;
+    }else{
+        pausa(erro);
+        return 0;
+    }
 }
 
 char pausa(char *titulo){
@@ -181,6 +212,17 @@ dTrioVet *invMod(int n){
                 }
                 
             }
+        }
+    }
+    return vector;
+}
+
+
+dVector *raizMod(int n, int rad){
+    dVector *vector=NULL;
+    for(int x=0; x<n;x++){
+        if(((x*x)%n)==rad){
+            vector= novoInt(vector, x);
         }
     }
     return vector;

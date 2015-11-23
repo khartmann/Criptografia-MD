@@ -36,16 +36,20 @@ int menu();
 //Apresenta opçoes do programa
 
 
-int imprChar(dVector *vet);
+int imprChar(dVector *vet, char *titulo, char *erro);
 //Entrada de ASCII NO MAXIMO 10000
 //Imprime a frase equivalente aos numeros recebidos pela funçao.
 
-int imprInt(char *cripto);
+int imprInt(char *cripto, char *titulo);
 //Imprime o codigo ASC II
 
-int imprInvM(dTrioVet *vector);
+int imprInvM(dTrioVet *vector, char *erro);
 //Entrada: Lista com dois valores e interio n do tamanho do conjunto
 //Impprime dois pontos salvos no struct tipo listaInvM
+
+int imprVet(dVector *vet, char *titulo, char *erro);
+//Imprime um vetor dinamico do tipo dVector
+// recebe o vetor a sem impresso e um titulo a ser impresso antes do vetor
 
 dVector *entradaASCII(char *titulo);
 // Entrada de Ints
@@ -64,6 +68,10 @@ char pausa(char *titulo);
 
 dTrioVet *invMod(int n);
 //Imprime os inversos Modulares
+
+dVector *raizMod(int n, int rad);
+//Determina as raizes modulares do
+//numero digitado em int rad no conjunto int n
 
 dTrioVet *novoTrio(dTrioVet *vector ,int x, int y, int n);
 //salva 3 valores em uma lista Struct
