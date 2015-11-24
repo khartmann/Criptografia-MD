@@ -17,7 +17,7 @@
 int menu(){
     int op;
     fflush(stdin);
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-----------MENU-----------\n1-Frase para ASCII\n2-ASCII para Frase\n3-Verificaçao de Inversos Modulares\n4-Raizes Modulares\n0-Sair do programa\n--------------------------\n\n\nDigite sua opçao: ");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-----------MENU-----------\n1-Frase para ASCII\n2-ASCII para Frase\n3-Verificaçao de Inversos Modulares\n4-Raizes Modulares\n5-Máximo Divisor Comum\n0-Sair do programa\n--------------------------\n\n\nDigite sua opçao: ");
     scanf(" %d", &op);
     switch (op){
         case 1:
@@ -35,6 +35,10 @@ int menu(){
         case 4:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             return imprVet(raizMod(entradaInt("\n\n\n\nDigite o tamanho do conjunto ( Zn ) a ser analizado: "), entradaInt("\n\n\n\nDigite o Radicando n da raiz √n: ")), "\n\n\n Raizes Modulares: ", "\n\nNao ha raizes deste numero nesse conjunto Zn\nDigite qualquer tecla para continuar: ") ;
+            break;
+        case 5:
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            return MDC(entradaInt("\n\n\n\nDigite o primeiro valor a ser analizado: "), entradaInt("\n\n\n\nDigite o segundo valor a ser analizado: "));
             break;
         case 0:
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObrigado por usar o programa.\n\n ");
@@ -65,7 +69,7 @@ dVector *entradaASCII(char *titulo){
         tmp=entradaInt("");
         vector=novoInt(vector, tmp);
     }while ( tmp!=0);
-    
+
     fflush(stdin);
     return vector;
 }
@@ -82,7 +86,7 @@ int imprChar(dVector *vet, char *titulo, char *erro){
     printf("%s", titulo);
     dVector *teste;
     if(vet != NULL){
-        
+
         for (teste = vet; teste!=NULL ; teste=teste->prox){
             printf("%c", teste->x);
         }
@@ -168,7 +172,7 @@ dTrioVet *novoTrio(dTrioVet *vector ,int x, int y, int n){
         novoElemento->x=x;
         novoElemento->y=y;
         novoElemento->prox=NULL;
-        
+
         dTrioVet *teste;
         for(teste=vector; teste->prox!=NULL;teste=teste->prox);
         teste->prox= novoElemento;
@@ -185,7 +189,7 @@ dVector *novoInt(dVector *vector, int x){
     }else{
         novoElemento->x= x;
         novoElemento->prox= NULL;
-        
+
         dVector *teste;
         for(teste=vector; teste->prox != NULL; teste=teste->prox);
         teste->prox= novoElemento;
@@ -201,7 +205,7 @@ dTrioVet *invMod(int n){
                 if(((x*y)%n)==1){
                     vector= novoTrio(vector, x, y, n);
                 }
-                
+
             }
         }
     }else{
@@ -210,7 +214,7 @@ dTrioVet *invMod(int n){
                 if(((x*y)%n)==1){
                     vector= novoTrio(vector, x, y, n);
                 }
-                
+
             }
         }
     }
@@ -228,3 +232,15 @@ dVector *raizMod(int n, int rad){
     return vector;
 }
 
+int MDC(int n1, int n2){
+int mdc=1, i;
+for (i=2; i<= (n1/2); i++){
+    if (n1mod(i) == n2mod(i)){
+        printf("Divisor comum: %d", i);
+        mdc *= i;
+    }
+}
+printf("Máximo Divisor Comum:%d", mdc);
+pausa("\n\nDigite qualquer tecla pra continuar: ");
+return mdc;
+}
